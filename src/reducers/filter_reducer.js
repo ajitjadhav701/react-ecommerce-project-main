@@ -11,65 +11,78 @@ import {
 
 const filter_reducer = (state, action) => {
   if (action.type === LOAD_PRODUCTS) {
+    let maxPrice=action.payload.map((p)=>p.price);//will get the array[] of prices
+    maxPrice=Math.max(...maxPrice);
+   // console.log(maxPrice);
     return {
       ...state,
       all_products: [...action.payload],
       filtered_products: [...action.payload],
+      filters:{...state.filters,max_price:maxPrice,price:maxPrice}
     };
   }
-  if(action.type===SET_GRIDVIEW){
-    return {...state,grid_view:true}
+  if (action.type === SET_GRIDVIEW) {
+    return { ...state, grid_view: true };
   }
-  if(action.type===SET_LISTVIEW){
-    return {...state,grid_view:false}
+  if (action.type === SET_LISTVIEW) {
+    return { ...state, grid_view: false };
   }
-  if(action.type===UPDATE_SORT){
-    return {...state,sort:action.payload}
+  if (action.type === UPDATE_SORT) {
+    return { ...state, sort: action.payload };
   }
-  if(action.type===SORT_PRODUCTS){
-    const {sort,filtered_products}=state;
-    let tempProducts=[...filtered_products];
-    if(sort==='price-lowest'){
+  if (action.type === SORT_PRODUCTS) {
+    const { sort, filtered_products } = state;
+    let tempProducts = [...filtered_products];
+    if (sort === "price-lowest") {
       //console.log('lowest');
       // tempProducts=tempProducts.sort((a,b)=>a.price-b.price);
-      tempProducts=tempProducts.sort((a,b)=>{
-        if(a.price<b.price){
-          return -1
+      tempProducts = tempProducts.sort((a, b) => {
+        if (a.price < b.price) {
+          return -1;
         }
-        if(a.price>b.price){
-          return 1
+        if (a.price > b.price) {
+          return 1;
         }
-         return 0
-      })  
+        return 0;
+      });
     }
-  
-    if(sort==='price-highest'){
+
+    if (sort === "price-highest") {
       //console.log('highest')
       //tempProducts=tempProducts.sort((a,b)=>b.price-a.price);
-      tempProducts=tempProducts.sort((a,b)=>{
-        if(a.price>b.price){
-          return -1
+      tempProducts = tempProducts.sort((a, b) => {
+        if (a.price > b.price) {
+          return -1;
         }
-        if(a.price<b.price){
-          return 1
+        if (a.price < b.price) {
+          return 1;
         }
-         return 0
-      }) 
+        return 0;
+      });
     }
-    if(sort==='name-a'){
+    if (sort === "name-a") {
       //console.log('name-a')
-       tempProducts=tempProducts.sort((a,b)=>{
-        return a.name.localeCompare(b.name)
-       })
+      tempProducts = tempProducts.sort((a, b) => {
+        return a.name.localeCompare(b.name);
+      });
     }
-    if(sort==='name-z'){
-    //  console.log('name-z')
-     tempProducts=tempProducts.sort((a,b)=>{
-        return b.name.localeCompare(a.name)
-       })
+    if (sort === "name-z") {
+      //  console.log('name-z')
+      tempProducts = tempProducts.sort((a, b) => {
+        return b.name.localeCompare(a.name);
+      });
     }
-    return {...state,filtered_products:tempProducts} 
+    return { ...state, filtered_products: tempProducts };
   }
+  if(action.type===UPDATE_FILTERS){
+      const {name,value}=action.payload;
+      return {...state,filters:{ ...state.filters,[name]:value }}
+    }
+
+    if(action.type==FILTER_PRODUCTS){
+      console.log('filtering product')
+      return{...state}
+    }
 
   throw new Error(`No Matching "${action.type}" - action type`);
 };
