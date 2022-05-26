@@ -80,8 +80,18 @@ const filter_reducer = (state, action) => {
   }
 
   if (action.type == FILTER_PRODUCTS) {
-    console.log("filtering product");
-    return { ...state };
+    //console.log("filtering product");
+    const {all_products}=state;
+    const {text,category,company,color,price,shipping}=state.filters;
+    
+    let tempProducts=[...all_products ]
+//filtering statments
+    if(text){
+      tempProducts=tempProducts.filter((product)=>{
+        return product.name.toLowerCase().startsWith(text)
+      })
+    }
+    return { ...state, filtered_products:tempProducts};
   }
 
   if (action.type === CLEAR_FILTERS) {
