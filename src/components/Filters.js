@@ -17,7 +17,7 @@ const Filters = () => {
       shipping,
     },
     updateFilters,
-    claerFilters,
+    clearFilters,
     all_products,
   } = useFilterContext();
 
@@ -61,7 +61,7 @@ const Filters = () => {
               })}
             </div>
           </div>
-          {/*end of companies */}
+          {/*filter companies */}
           <div className="form-control">
             <h5>company</h5>
             <select
@@ -79,7 +79,8 @@ const Filters = () => {
               })}
             </select>
           </div>
-          {/** end of colors */}
+          {/*end of companies */}
+          {/** filters colors */}
           <div className="form-controls">
             <h5>colors</h5>
             <div className="colors">
@@ -116,7 +117,9 @@ const Filters = () => {
               })}
             </div>
           </div>
-          {/** end of price.. */}
+          {/** end of filters colors */}
+
+          {/** price.. */}
           <div className="form-control">
             <h5>price</h5>
             <p className="price">{formatPrice(price)}</p>
@@ -129,7 +132,24 @@ const Filters = () => {
               value={price}
             />
           </div>
+          {/** end of price.. */}
+          {/** shipping filters */}
+
+          <div className="form-control shipping">
+            <label htmlFor="shipping">free shipping</label>
+            <input
+              type="checkbox"
+              name="shipping"
+              id="shipping "
+              onChange={updateFilters}
+              checked={shipping}
+            />
+          </div>
+          {/** end of  shipping filters */}
         </form>
+        <button type="button" className="clear-btn" onClick={clearFilters}>
+          clear filters
+        </button>
       </div>
     </Wrapper>
   );
