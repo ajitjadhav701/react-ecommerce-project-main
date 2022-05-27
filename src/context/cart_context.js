@@ -38,7 +38,7 @@ export const CartProvider = ({ children }) => {
 
   //remove from cart fun
   const removeItem=(id)=>{
-
+    dispatch({type:REMOVE_CART_ITEM,payload:id})
   }
 
   //tottle amount fun
@@ -47,7 +47,7 @@ export const CartProvider = ({ children }) => {
   }
   //clear cart fun
   const clearCart=()=>{
-
+    dispatch({type:CLEAR_CART})
   }
 
   useEffect(()=>{
