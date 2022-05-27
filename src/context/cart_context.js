@@ -43,7 +43,8 @@ export const CartProvider = ({ children }) => {
 
   //tottle amount fun
   const toggleAmount=(id,value)=>{
-
+    console.log(id,value);
+    dispatch({type:TOGGLE_CART_ITEM_AMOUNT,payload:{id,value}});
   }
   //clear cart fun
   const clearCart=()=>{
