@@ -9,7 +9,9 @@ const CheckoutPage = () => {
   return <main>
     <PageHero title='checkout'/>
     <Wrapper className='page'>
-    <h1>checkout here</h1></Wrapper>
+    <h1>Oops,This Page is Under Construction</h1>
+    <h4 style={{color:'blue',}}>Contact Ajit Jadhav for more info</h4>
+    </Wrapper>
   </main>
 }
 const Wrapper = styled.div``
